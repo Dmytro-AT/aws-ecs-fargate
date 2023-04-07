@@ -29,7 +29,7 @@ resource "aws_ssm_parameter" "NODE_ENV" {
 resource "aws_ssm_parameter" "MONGO_URI" {
   name  = "${upper(var.env)}_MONGO_URI"
   type  = "String"
-  value = "mongodb+srv://project-dev:123321.mongodb.net"
+  value = "endpoint_to_mongo"
   tags  = {
     environment = var.env
   }
@@ -38,7 +38,7 @@ resource "aws_ssm_parameter" "MONGO_URI" {
 resource "aws_ssm_parameter" "REDIS_HOST" {
   name  = "${upper(var.env)}_REDIS_HOST"
   type  = "String"
-  value = "redis://default:123321@redis-1231.cloud.redislabs.com"
+  value = "endpoint_to_redis_server"
   tags  = {
     environment = var.env
   }
