@@ -1,0 +1,50 @@
+[
+  {
+    "name": "${api_name}",
+    "cpu": ${fargate_cpu},
+    "memory": ${fargate_memory},
+    "networkMode": "awsvpc",
+    "image": "${api_image}",
+    "essential": true,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/ecs/${api_name}",
+        "awslogs-region": "${region}",
+        "awslogs-stream-prefix": "${env}"
+      }
+    },
+    "environment": [],
+    "volumesFrom": [],
+    "mountPoints": [],
+    "secrets": [
+      {
+        "valueFrom": "${upper(env)}_APP_URL",
+        "name": "APP_URL"
+      },
+      {
+        "valueFrom": "${upper(env)}_NODE_ENV",
+        "name": "NODE_ENV"
+      },
+      {
+        "valueFrom": "${upper(env)}_MONGO_URI",
+        "name": "MONGO_URI"
+      },
+      {
+        "valueFrom": "${upper(env)}_REDIS_HOST",
+        "name": "REDIS_HOST"
+      },
+      {
+        "valueFrom": "${upper(env)}_REDIS_PORT",
+        "name": "REDIS_PORT"
+      }
+    ],
+    "portMappings": [
+        {
+        "containerPort": ${api_port},
+        "hostPort": ${api_port}
+        }
+    ]
+  }
+]
+
